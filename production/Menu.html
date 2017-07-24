@@ -68,22 +68,22 @@
                                         </a>
                                         <ul class="nav child_menu">
                                             <li>
-                                                <a onclick="hacer_click('divCc')">
+                                                <a onclick="hacer_click('divaa')">
                                                     Fecha
                                                 </a>
                                             </li>
                                             <li>
-                                                <a onclick="hacer_click('divCc')">
+                                                <a onclick="hacer_click('divab')">
                                                     Fibonacci
                                                 </a>
                                             </li>
                                             <li>
-                                                <a onclick="hacer_click('divCc')">
+                                                <a onclick="hacer_click('divl')">
                                                     Login
                                                 </a>
                                             </li>
                                             <li>
-                                                <a onclick="hacer_click('divCc')">
+                                                <a onclick="hacer_click('divac')">
                                                     Alerta
                                                 </a>
                                             </li>
@@ -145,6 +145,54 @@
                 <!-- /top navigation -->
                 <!-- page content -->
                 <div class="right_col" role="main">
+                                        <!--FECHA-->
+                    <div class="subdiv" id ="divaa">
+                        <h1>
+                            Fecha
+                        </h1>
+                        <div>
+                            <button class="btn btn-info" id="btnfecha" type="button" onclick="btnfecha()">
+                                Obtener Fecha
+                            </button>
+                            <h4 id="resultadofecha">Fecha Actual</h4>
+                        </div>
+                    </div>
+                    <!--FIBONACCI-->
+                    <div class="subdiv" id ="divab">
+                        <h1>
+                            Función Fibonacci
+                        </h1>
+                        <div>
+                            <input class="form-control" id="txtfibo" placeholder="Ingrese cantidad de números de serie Fibonacci" type="text">
+                        </input>
+                        <br>
+                            <button class="btn btn-info" id="btnfibo" type="button" onclick="btnfibo()">
+                                Ejecutar
+                            </button>
+                            <h4 id="resultadofibo">Resultado</h4>
+                        </div>
+                    </div>
+                    <!--LOGIN-->
+                    <div class="subdiv"  id="divl">
+                        <div class="main">
+                            <h1>Formulario de ingreso</h1>
+                                <form id="form_id" method="post" name="myform">
+                                    <label>Usuario:</label>
+                                        <input class="form-control" type="text" name="username" id="username"/>
+                                    <br>
+                                    <label>Contraseña:</label>
+                                        <input class="form-control" type="password" name="password" id="password"/>
+                                        <input class="btn btn-info" type="button" value="Login" id="submit" onclick="validate()"/>
+                                </form>
+                        </div>
+                    </div>
+                    <!--ALERTA-->
+                    <div class="subdiv" id ="divac">
+                        <button class="btn btn-info" id="btnalerta" type="button" onclick="btnalerta()">
+                            ¡Alerta!
+                        </button>
+                    </div>
+
                     <!-- CONTEO DE CARACTERES-->
                     <div class="subdiv" id="divCc">
                         <h1>
@@ -377,4 +425,59 @@
 </script>
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js">
+</script>
+<script>
+            function btnfibo() {
+                count = parseInt(document.getElementById("txtfibo").value);
+                a = 0, b = 1, suma = 0;
+                salida = "<b>Los primeros " + count + " elementos en la serie Fibonacci son: </b> ";
+
+                for(i = 0; i < count; i ++) {
+                    salida += a + " ";
+                    suma = a + b;
+                    a = b;
+                    b = suma;
+                }  
+
+                document.getElementById("resultadofibo").innerHTML = salida;
+            }
+       
+            function btnalerta() {
+                alert("Alerta! Hola Mundo!");
+            }
+
+    function btnfecha(){
+
+        var meses = new Array ("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
+        var f = new Date();
+        salida = (f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear() + " Hora " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+        document.getElementById("resultadofecha").innerHTML = salida;
+
+    }
+</script>
+<script>
+var attempt = 3; // Variable to count number of attempts.
+// Below function Executes on click of login button.
+function validate(){
+var username = document.getElementById("username").value;
+var password = document.getElementById("password").value;
+if ( username == "Administrador" && password == "Web1234"){
+alert ("Gracias por regresar");
+window.location = "menu.html"; // Redirecting to other page.
+return false;
+}
+else{
+attempt --;// Decrementing by one.
+alert("Le quedan "+attempt+" intentos;");
+// Disabling fields after 3 attempts.
+if( attempt == 0){
+document.getElementById("username").disabled = true;
+document.getElementById("password").disabled = true;
+document.getElementById("submit").disabled = true;
+return false;
+}
+}
+}
+
+
 </script>
